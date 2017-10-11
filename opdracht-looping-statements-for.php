@@ -16,11 +16,11 @@
 <body>
     <h1>Opdracht for : deel 1</h1>
     <table>
-         <?php for( $rij = 0; $rij < $rijen ; $rij++):?> 
+         <?php for( $rij = 0; $rij <= $rijen ; $rij++):?> 
    
             <tr>
-					<?php for ( $kolom = 0; $kolom < $kolommen; ++$kolom): ?>
-                    
+					<?php for ( $kolom = 0; $kolom <= $kolommen; ++$kolom): ?>
+
 						<td>kolom</td>
 
 					<?php endfor ?>

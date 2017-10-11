@@ -14,6 +14,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BoodschappenLijstje</title>
+    <style>
+			
+			.oneven
+			{
+				background-color	:	lightgreen;
+			}
+
+		</style>
 </head>
 <body>
 
@@ -27,7 +35,7 @@
      <li><?php  echo $shoppinArr[$counter] ?></li>
         <?php $counter ++ ?>
         <?php endwhile ?>
-        
+
     </ul>
   
         <!-- makkelijker met een foreach dan while 
