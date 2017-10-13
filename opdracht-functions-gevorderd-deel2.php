@@ -10,14 +10,16 @@ function calculateHit ()
 
     $valueArr   =   array();
 
-    $hitChance  =   rand(0.9);  # --> 10 waardes
+    $hitChance  =   rand(0,9);  # --> 10 waardes
+
+    $gameAdvance  =   array();
 
 
     if ( $hitChance <= 3 ) # --> 40% van 10 mogelijke random waardes
     {
         $pigHealth -- ;
         $valueArr["hit"]     = TRUE;
-        $valueArr["¨message"]= "Raak! Er zijn nog maar ". $pigHealth ." varkens over.";
+        $valueArr["message"]= "Raak! Er zijn nog maar ". $pigHealth ." varkens over.";
 
     }
     else
@@ -34,16 +36,39 @@ function calculateHit ()
 
 function launchAngryBird ()
 {
-   global $pigHealth;
-   global $maximumThrows;
+    global $pigHealth;
+    global $maximumThrows;
+    global $gameAdvance;
 
-   static $gameAdvance  =   array();
+    static $launchAmount = 0;
 
-   
+    if ( $launchAmount < $maximumThrows )
+    {    
 
+         $valueArr = calculateHit();
 
+         $gameAdvance [] = $valueArr ['message'] ;
+         $launchAmount ++ ;
+         launchAngryBird();
+    }
+    else
+    {
+
+          if ($pigHealth == 0)
+          {
+       
+               $gameAdvance[] = "Gewonnen!";
+
+          }
+          else 
+          {
+            $gameAdvance[]= "Verloren";
+
+          }
+    }
 }
 
+launchAngryBird();
 
 
 ?>
@@ -61,6 +86,11 @@ function launchAngryBird ()
 <body>
     <h1>Opdracht functions gevorderd deel 2</h1>
 
+    <ul>
+            <?php foreach( $gameAdvance as $show ): ?>
+                <li><?= $show ?></li>
+            <?php endforeach ?>
+        </ul>
 
 </body>
 </html>
