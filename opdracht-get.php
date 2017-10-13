@@ -128,7 +128,12 @@ if ( $_GET['id'])
 
           <p><?php echo $value["datum"]?></p>
 
-          <p><?php echo ( !$artikelGevonden ) ? str_replace ( "\r\n", "</p><p>", substr( $artikel['inhoud'], 0, 50 ) ) . '...': str_replace ( "\r\n", "</p><p>",$artikel['inhoud'] ) ; ?></p>
+          <?php  if  ($artikelGevonden): ?>
+         <p> <?php echo $artikel['inhoud'] ; ?></p>
+        
+         <?php  else: ?>
+         <p><?php substr( $artikel['inhoud'], 0, 50 ) ) . '...' ;?></p>
+           <?php endif ?>
 
           <a href="opdracht-get.php?id=<?php echo $id ?>">Lees verder</a>
 
