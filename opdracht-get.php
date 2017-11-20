@@ -5,7 +5,7 @@ $artikels = array(
 
               array ( 'titel' =>"Hij wou ‘een goei verkrachtingsscène’ met me oefenen",
              'datum' => '12 oktober 2017',
-             'inhoud' => 'In de nasleep van het aanrand-schandaal rond Hollywoodproducer Harvey Weinstein klappen ook hier actrices uit de biecht. Actrices Anemone Valcke en Marijke Pinoy getuigden in ‘Van Gils & Gasten’ op Eén over situaties waarin zij door de jaren heen op Vlaamse conservatoria, podia en op filmsets zijn mee geconfronteerd. ',
+             'inhoud' => "In de nasleep van het aanrand-schandaal rond Hollywoodproducer Harvey Weinstein klappen ook hier actrices uit de biecht. Actrices Anemone Valcke en Marijke Pinoy getuigden in ‘Van Gils & Gasten’ op Eén over situaties waarin zij door de jaren heen op Vlaamse conservatoria, podia en op filmsets zijn mee geconfronteerd. ",
              'afbeelding'=> 'img/actrice.jpg',
              'afbeeldingBeschrijving' => 'Foto van actrices Anemone Valck en Marijke Pinoy',
 ),
@@ -26,28 +26,43 @@ $artikels = array(
 
 );
 
-$artikelNiGevonden = FALSE;
-$artikelGevonden   = FALSE;
+$notExist = FALSE;
+$singleArtikel    = FALSE;
 
-
-if ( $_GET['id'])
+if ( isset($_GET['id']) )
 {
-    $id = $_GET['id'];
 
-    if (array_key_exists( $id , $artikels )) #zoekt of key waarde is terug te vinden in array
-    {
-        $artikels 			= 	array( $artikels[$id] );
-        $artikelGevonden    = TRUE;
+	$id = $_GET['id'];
 
-    }
-    else
-    {
-        $artikelNiGevonden = TRUE;
-    }
+	if( array_key_exists($id , $artikels))
+	{
+		$singleArtikel =TRUE;
+
+		$artikels = array( $artikels[$id] );
+          
+
+	}
+	else {$notExist = TRUE;}
+
 
 }
+if ( isset($_GET['verzend']) )
+{
+
+	$search = $_GET['search'];
+
+	foreach ( $artikels as $key => $inhoud )
+	{
+		$keys = array_search($search , $artikels );
+		
+		if()
+          
+        else {$notExist = TRUE;}
+	}
+	
 
 
+}
 
 ?>
 
@@ -70,6 +85,16 @@ if ( $_GET['id'])
 			margin:	0 auto;
 		}
 
+        h1
+		{
+			text-align: center;
+			color: #000;
+		}
+		form
+		{
+			float:right;
+			padding-right: 20px;
+		}
 		img
 		{
 			max-width: 100%;
@@ -101,50 +126,63 @@ if ( $_GET['id'])
 			margin-left: 16px;
 		}
 
+		
+		figcaption
+		{
+		   font-size:12px;
+		}
+
+		.single figcaption
+		{
+			clear:both;
+			text-align:center;
+		}
 
 	</style>
-    <?php if ( !$artikelGevonden ): ?>
-		<title>Opdracht $_GET </title>
-
-	<?php elseif ( $nietBestaandArtikel ): ?>
-		<title>Opdracht $_GET / Het artikel met id <?php echo $id ?> bestaat niet</title>
-
+	<?php if ( !$singleArtikel ): ?>
+		<title>Oplossing get</title>
+	<?php elseif ( $notExist ): ?>
+		<title>  Artikel met id <?php echo $id ?> bestaat niet</title>
 	<?php else: ?>
-		<title>Opdracht $_GET / <?php echo $artikels[0]['titel'] ?></title>
-
+		<title> <?php echo $artikels[0]['titel'] ?></title>
 	<?php endif ?>
+
+
 </head>
 <body>
-
+<form action="opdracht-get.php" method="get">
+ <input type="text" name="search" >
+<button type="submit" form="form1" value="verzend">Zoek</button>
+	</form>
 <h1>De krant van vandaag</h1>
 
-    <div class = "container " >
 
-       <?php foreach ( $artikels as $id => $value): ?>
-
-       <div class ="multiple">
-
-          <h3><?php echo $value['titel']?></h3>
-
-          <p><?php echo $value["datum"]?></p>
-
-          <?php  if  ($artikelGevonden): ?>
-         <p> <?php echo $artikel['inhoud'] ; ?></p>
-        
-         <?php  else: ?>
-         <p><?php substr( $artikel['inhoud'], 0, 50 ) ) . '...' ;?></p>
-           <?php endif ?>
-
-          <a href="opdracht-get.php?id=<?php echo $id ?>">Lees verder</a>
-
-         <img src="<?php echo $value['afbeelding']?>" alt="<?php echo $value["afbeeldingBeschrijving"]?>">
-        
-         </div>
-
-      <?php endforeach ?>
+<?php if ( !$notExist ): ?>
+<div class="container">
 
 
-    </div>
-    
+		<?php foreach ( $artikels as $id => $artikel ): ?>
+
+		<div class="<?php echo ( !$singleArtikel ) ? 'multiple': 'single' ; ?>">
+			<h2><?php echo $artikel['titel']?></h2>
+			<p><?php echo $artikel['datum']?></p>
+			<figure> 
+			<img src="<?php echo $artikel['afbeelding']?>" alt="<?php echo $artikels['afbeeldingBeschrijving']?>">
+			<figcaption><?php echo $artikel['afbeeldingBeschrijving']?></figcaption>
+			</figure>
+			<p><?php echo ( !$singleArtikel ) ? str_replace ( "\r\n", "</p><p>", substr( $artikel['inhoud'], 0, 50 ) ) . '...': str_replace ( "\r\n", "</p><p>",$artikel['inhoud'] )  ?></p>
+
+			<?php if ( !$singleArtikel ): ?>
+			<a href="opdracht-get.php?id=<?php echo $id ?>">Lees verder ></a>
+		    <?php endif?>
+		    
+		</div>
+
+		<?php endforeach?>
+
+</div>
+<?php else: ?>
+		<p>Het artikel bestaat niet.</p>
+<?php endif?>
 </body>
 </html>
