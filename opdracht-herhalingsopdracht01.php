@@ -31,8 +31,20 @@ if (isset($_GET['link']))
 
             break;
     }
+
 }
 
+
+function showList ( $map )
+{
+    $bestandenArray = scandir ('../' . $map . '/');
+
+    // eerste twee keys verwijderen (bevatten '.' en '..')
+    array_shift( $bestandenArray );
+    array_shift( $bestandenArray );
+
+    return $bestandenArray;
+}
 
 ?>
 
