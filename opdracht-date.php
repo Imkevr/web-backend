@@ -8,6 +8,7 @@ $timestamp = mktime(22, 35, 25, 1, 21, 1904);
 $date= date("d F Y, g:i:s A", $timestamp);
 
 $date2	= strftime('%d %B %Y, %H:%M:%S %p', $timestamp);
+
 ?>
 
 
