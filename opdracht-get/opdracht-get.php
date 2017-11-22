@@ -46,17 +46,21 @@ if ( isset($_GET['id']) )
 
 
 }
-if ( isset($_GET['verzend']) )
+if ( isset($_GET['submit']) )
 {
 
 	$search = $_GET['search'];
 
 	foreach ( $artikels as $key => $inhoud )
 	{
-		$keys = array_search($search , $artikels );
+
 		
-		if()
-          
+		if(array_search($search , $artikels ))
+          {
+		           $singleArtikel =TRUE;
+
+		            $artikels = array( $artikels[$id] );
+		  }
         else {$notExist = TRUE;}
 	}
 	
@@ -152,7 +156,7 @@ if ( isset($_GET['verzend']) )
 <body>
 <form action="opdracht-get.php" method="get">
  <input type="text" name="search" >
-<button type="submit" form="form1" value="verzend">Zoek</button>
+<input type="submit" name="submit" value="zoek">
 	</form>
 <h1>De krant van vandaag</h1>
 
