@@ -40,7 +40,7 @@
         </ul>
 
 
-        <a href="opdracht-sessions-1.php?session=destroy">Vernietig sessie</a>
+        <a href="opdracht-sessions.php?session=destroy">Vernietig sessie</a>
 
 
     </body>
