@@ -39,7 +39,7 @@
 		$bestandenArray = $resultaten;
 	}
 	function getBestanden($map){
-		$bestandenArray = scandir( '../'. $map . '/');
+		$bestandenArray = scandir( '../../'. $map . '/');
 		array_shift($bestandenArray);
 		array_shift($bestandenArray);
 		return $bestandenArray;
@@ -64,11 +64,11 @@
 		<h1>Herhalingsopdracht</h1>
 
 		<ul>
-			<li><a href="18-herhalingsopdracht-01.php?link=cursus">Cursus</a></li>
-			<li><a href="18-herhalingsopdracht-01.php?link=voorbeelden">Voorbeelden</a></li>
-			<li><a href="18-herhalingsopdracht-01.php?link=oplossingen">Oplossingen</a></li>
+			<li><a href="index.php?link=cursus">Cursus</a></li>
+			<li><a href="index.php?link=voorbeelden">Voorbeelden</a></li>
+			<li><a href="index.php?link=oplossingen">Oplossingen</a></li>
 		</ul>
-		<form action="18-herhalingsopdracht-01.php" method="GET">
+		<form action="index.php" method="GET">
 
 			<label id="search-query">Zoek naar:</label>
 			<input type="text" name="search-query" id="search-query">
@@ -78,7 +78,7 @@
 		</form>
 
 		<?php if ( $cursus ): ?>
-			<iframe src="../web-backend-intro.pdf"></iframe>
+			<iframe src="web-backend-intro.pdf"></iframe>
 		<?php endif ?>
 
 		<?php if ( $voorbeelden || $oplossingen ): ?>
