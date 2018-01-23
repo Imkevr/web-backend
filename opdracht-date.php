@@ -25,7 +25,7 @@ $date2	= strftime('%d %B %Y, %H:%M:%S %p', $timestamp);
 <h3>Deel 1</h3>
 <p>timestamp -> <?php echo $timestamp?></p>
 <p> date -><?php echo $date?></p>
-<p> date -><?php echo $date2?></p>
+<p> date -><?php echo $date2?> </p>
 
 
 
